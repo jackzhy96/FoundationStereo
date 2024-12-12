@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRBT9DCW3F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZRBT9DCW3F');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <!-- <script src="http://popcornjs.org/code/dist/popcorn-complete.js"></script> -->
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size:36px;">FoundationStereo: Zero-Shot Stereo Matching</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://wenbowen123.github.io/">Bowen Wen</a></sup>,
+              <a href="https://www.linkedin.com/in/matthew-trepte-518164120">Matthew Trepte</a></sup>,
+              <a href="https://ieeexplore.ieee.org/author/37088688814">Joseph Aribido</a></sup>,
+              <a href="https://research.nvidia.com/person/jan-kautz">Jan Kautz</a></sup>,
+              <br>
+              <a href="https://research.nvidia.com/person/orazio-gallo">Orazio Gallo</a></sup>,
+              <a href="https://research.nvidia.com/person/stan-birchfield">Stan Birchfield</a></sup>
+            </span>
+          </div>
+          <br>
+
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block"></sup>NVIDIA</span>
+          </div> -->
+
+          <img src="static/images/nvlogo.png" style="max-height: 150px">
+
+          <!-- <div style="font-size:30px; font-weight: bold;">
+            CVPR 2024 <span style="color:red">(Highlight) </span>
+          </div> -->
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered" style="margin-bottom: 0;">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Tremendous progress has been made in deep stereo matching to excel on benchmark datasets through per-domain fine-tuning. However, achieving strong zero-shot generalization — a hallmark of foundation models in other computer vision tasks — remains challenging for stereo matching. We introduce FoundationStereo, a foundation model for stereo depth estimation designed to achieve strong zero-shot generalization. To this end, we first construct a large-scale (1M stereo pairs) synthetic training dataset featuring large diversity and high photorealism, followed by an automatic self-curation pipeline to remove ambiguous samples. We then design a number of network architecture components to enhance scalability, including a side-tuning feature backbone that adapts rich monocular priors from vision foundation models to mitigate the sim-to-real gap, and long-range context reasoning for effective cost volume filtering. Together, these components lead to strong robustness and accuracy across domains, establishing a new standard in zero-shot stereo depth estimation.
+          </p>
+        </div>
+        <img src="static/images/intro.jpg" width="100%">
+      </div>
+      </div>
+      <div style="display: flex; width: 100%; flex: none; text-align: center; gap: 0; justify-content: space-between; margin-top: 0px;">
+        <p style="margin: 0; width: 100%; text-align: center;">(Interact with the point cloud below)</p>
+      </div>
+      <div style="display: flex; width: 100%; flex: none; text-align: center; gap: 0; justify-content: space-between; margin-top: 0px;">
+        <model-viewer style="width: 300px; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block;" id='m3'
+          src="static/models/desk.glb"
+          exposure="0.5"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 75deg 0.5m"
+          camera-controls touch-action="none">
+        </model-viewer>
+        <model-viewer style="width: 300px; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block;" id='m3'
+          src="static/models/gr00t.glb"
+          exposure="0.5"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 75deg 1m"
+          camera-controls touch-action="none">
+        </model-viewer>
+        <model-viewer style="width: 300px; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block;" id='m3'
+          src="static/models/arm.glb"
+          exposure="0.5"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 75deg 1m"
+          camera-controls touch-action="none">
+        </model-viewer>
+        <model-viewer style="width: 300px; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block;" id='m3'
+          src="static/models/zank.glb"
+          exposure="1"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 75deg 1m"
+          camera-controls touch-action="none">
+        </model-viewer>
+        <model-viewer style="width: 300px; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block; " id='m3'
+          src="static/models/road.glb"
+          exposure="0.5"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 75deg 0.2m"
+          camera-controls touch-action="none">
+        </model-viewer>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">ETH3D Leaderboard 🏆</h2>
+        <p style="text-align: left;margin-bottom: 10px">We obtained the 1st place on the <a href="https://www.eth3d.net/low_res_two_view">ETH3D leaderboard</a> at the time of submission.</p>
+        <img src="static/images/eth_leaderboard.png" width="80%">
+      </div>
+    </div>
+
+
+
+    <br>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+          <p>The Side-Tuning Adapter (STA) adapts the rich monocular priors from a frozen DepthAnythingV2, while combined with fine-grained high-frequency features from multi-level CNN for unary feature extraction. Attentive Hybrid Cost Filtering (AHCF) combines the strengths of the Axial-Planar Convolution (APC) filtering and a Disparity Transformer (DT) module to effectively aggregate the features along spatial and disparity dimensions over the 4D hybrid cost volume. An initial disparity is then predicted from the filtered cost volume, and subsequently refined through GRU blocks. At each refinement step, the latest disparity is used to look up features from both filtered hybrid cost volume and correlation volume to guide the next refinement. The iteratively refined disparity becomes the final output.
+          </p>
+        </div>
+        <img src="static/images/overview.jpg" width="100%">
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3" style="text-align: center;">Comparison of Stereo Matching</h2>
+        <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px;">
+          <p class="title is-5" style="margin: 0;">Scene:</p>
+          <span id="Endeavor" class="button scene is-info is-rounded" onclick="change_scene('Endeavor')">
+            Endeavor
+          </span>
+          <span id="Wall" class="button scene is-black is-rounded" onclick="change_scene('Wall')">
+            Wall
+          </span>
+          <span id="Robot" class="button scene is-black is-rounded" onclick="change_scene('Robot')">
+            Robot
+          </span>
+          <span id="Street" class="button scene is-black is-rounded" onclick="change_scene('Street')">
+            Street
+          </span>
+        </div>
+        <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px">
+          <p class="title is-5" style="margin: 0;">Method:</p>
+          <span id="Ours" class="button method is-info is-rounded" onclick="change_method('Ours')">
+            Ours
+          </span>
+          <span id="IGEV" class="button method is-black is-rounded" onclick="change_method('IGEV')">
+            IGEV
+          </span>
+          <span id="Selective-IGEV" class="button method is-black is-rounded" onclick="change_method('Selective-IGEV')">
+            Selective-IGEV
+          </span>
+          <span id="CREStereo" class="button method is-black is-rounded" onclick="change_method('CREStereo')">
+            CREStereo
+          </span>
+          <span id="CroCo v2" class="button method is-black is-rounded" onclick="change_method('CroCo v2')">
+            CroCo v2
+          </span>
+        </div>
+        <div style="display: flex; width: 100%; flex: none; text-align: center; justify-content: center; gap: 2px; margin-top: 10px; margin-bottom:-20px">
+          <img id="left" width="25%">
+          <img id="disp" width="25%">
+        </div>
+        <br>
+        <model-viewer style="width: 50%; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block; "
+          id="cloud"
+          exposure="0.5"
+          max-camera-orbit="Infinity 180deg 100%"
+          min-camera-orbit="-Infinity -180deg 10%"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 90deg 60%"
+          camera-controls touch-action="none">
+        </model-viewer>
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3" style="text-align: center;">Comparison to Metric Monocular Depth</h2>
+        <!-- <div class="column is-three-fifths"> -->
+          <p style="text-align: left;">We compare with SOTA monocular metric depth estimation methods. Ours yields accurate metric scale point cloud. Feel free to play with the below interactive 3D viewer for detailed comparison.</p>
+        <!-- </div> -->
+        <img src="static/images/mono_comparison.png" width="70%" style="margin-top: 10px;">
+        <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: -30px; margin-bottom: -20px;">
+          <p class="title is-5" style="margin: 0;">Method:</p>
+          <span id="Ours_mono" class="button method_mono is-info is-rounded" onclick="change_method_mono('Ours')">
+            Ours
+          </span>
+          <span id="DepthAnythingV2" class="button method_mono is-black is-rounded" onclick="change_method_mono('DepthAnythingV2')">
+            DepthAnythingV2
+          </span>
+          <span id="Depth Pro" class="button method_mono is-black is-rounded" onclick="change_method_mono('Depth Pro')">
+            Depth Pro
+          </span>
+        </div>
+        <!-- <div style="display: flex; width: 100%; flex: none; text-align: center; justify-content: center; gap: 2px; margin-top: 10px; margin-bottom:-20px">
+          <img src="static/images/gr00t_left.png" width="25%">
+          <img id="mono_disp" width="25%">
+        </div> -->
+        <br>
+        <model-viewer style="width: 50%; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block; "
+          id="mono_cloud"
+          exposure="0.5"
+          max-camera-orbit="Infinity 180deg 100%"
+          min-camera-orbit="-Infinity -180deg 10%"
+          orientation="0deg 180deg 180deg"
+          camera-orbit="180deg 90deg 80%"
+          camera-controls touch-action="none">
+        </model-viewer>
+      </div>
+    </div>
+
+
+    <br>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Full Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/Ip_yWsGUF6c?si=qnkJtKPyeIl85WMx" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{wen2025stereo,
+  title={FoundationStereo: Zero-Shot Stereo Matching},
+  author={Bowen Wen and Matthew Trepte and Joseph Aribido and Jan Kautz and Orazio Gallo and Stan Birchfield},
+  journal={arXiv},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Contact</h2>
+    For questions, please reach out to <a href="https://wenbowen123.github.io/">Bowen Wen</a> (bowenw@nvidia.com).
+  </div>
+</section>
+
+
+
+  </div>
+</section>
+
+
+
+
+
+<script>
+  const comparison = {
+    "Endeavor":{
+      "left":"static/comparison/2023-02-16_18-50-35_endeavor_pod/left.png",
+      "Ours":
+      {
+        "disp":"static/comparison/2023-02-16_18-50-35_endeavor_pod/disp/ours.png",
+        'cloud': "static/comparison/2023-02-16_18-50-35_endeavor_pod/cloud/ours_denoise.glb"
+      },
+      "IGEV":
+      {
+        "disp":"static/comparison/2023-02-16_18-50-35_endeavor_pod/disp/igev.png",
+        'cloud': "static/comparison/2023-02-16_18-50-35_endeavor_pod/cloud/igev_denoise.glb"
+      },
+      "Selective-IGEV":
+      {
+        "disp":"static/comparison/2023-02-16_18-50-35_endeavor_pod/disp/sigev.png",
+        'cloud': "static/comparison/2023-02-16_18-50-35_endeavor_pod/cloud/sigev_denoise.glb"
+      },
+      "CREStereo":
+      {
+        "disp":"static/comparison/2023-02-16_18-50-35_endeavor_pod/disp/crestereo.png",
+        'cloud': "static/comparison/2023-02-16_18-50-35_endeavor_pod/cloud/crestereo_denoise.glb"
+      },
+      "CroCo v2":
+      {
+        "disp":"static/comparison/2023-02-16_18-50-35_endeavor_pod/disp/croco.png",
+        'cloud': "static/comparison/2023-02-16_18-50-35_endeavor_pod/cloud/croco_denoise.glb"
+      },
+    },
+    "Wall":{
+      "left":"static/comparison/wall/left.png",
+      "Ours":
+      {
+        "disp":"static/comparison/wall/disp/ours.png",
+        'cloud': "static/comparison/wall/cloud/ours_denoise.glb"
+      },
+      "IGEV":
+      {
+        "disp":"static/comparison/wall/disp/igev.png",
+        'cloud': "static/comparison/wall/cloud/igev_denoise.glb"
+      },
+      "Selective-IGEV":
+      {
+        "disp":"static/comparison/wall/disp/sigev.png",
+        'cloud': "static/comparison/wall/cloud/sigev_denoise.glb"
+      },
+      "CREStereo":
+      {
+        "disp":"static/comparison/wall/disp/crestereo.png",
+        'cloud': "static/comparison/wall/cloud/crestereo_denoise.glb"
+      },
+      "CroCo v2":
+      {
+        "disp":"static/comparison/wall/disp/croco.png",
+        'cloud': "static/comparison/wall/cloud/croco_denoise.glb"
+      },
+    },
+    "Robot":{
+      "left":"static/comparison/robot/left.png",
+      "Ours":
+      {
+        "disp":"static/comparison/robot/disp/ours.png",
+        'cloud': "static/comparison/robot/cloud/ours_denoise.glb"
+      },
+      "IGEV":
+      {
+        "disp":"static/comparison/robot/disp/igev.png",
+        'cloud': "static/comparison/robot/cloud/igev_denoise.glb"
+      },
+      "Selective-IGEV":
+      {
+        "disp":"static/comparison/robot/disp/sigev.png",
+        'cloud': "static/comparison/robot/cloud/sigev_denoise.glb"
+      },
+      "CREStereo":
+      {
+        "disp":"static/comparison/robot/disp/crestereo.png",
+        'cloud': "static/comparison/robot/cloud/crestereo_denoise.glb"
+      },
+      "CroCo v2":
+      {
+        "disp":"static/comparison/robot/disp/croco.png",
+        'cloud': "static/comparison/robot/cloud/croco_denoise.glb"
+      },
+    },
+    "Street":{
+      "left":"static/comparison/street/left.png",
+      "Ours":
+      {
+        "disp":"static/comparison/street/disp/ours.png",
+        'cloud': "static/comparison/street/cloud/ours_denoise.glb"
+      },
+      "IGEV":
+      {
+        "disp":"static/comparison/street/disp/igev.png",
+        'cloud': "static/comparison/street/cloud/igev_denoise.glb"
+      },
+      "Selective-IGEV":
+      {
+        "disp":"static/comparison/street/disp/sigev.png",
+        'cloud': "static/comparison/street/cloud/sigev_denoise.glb"
+      },
+      "CREStereo":
+      {
+        "disp":"static/comparison/street/disp/crestereo.png",
+        'cloud': "static/comparison/street/cloud/crestereo_denoise.glb"
+      },
+      "CroCo v2":
+      {
+        "disp":"static/comparison/street/disp/croco.png",
+        'cloud': "static/comparison/street/cloud/croco_denoise.glb"
+      },
+    },
+  }
+
+  const mono_comparison = {
+    'Ours': {
+      'disp': 'static/comparison/gr00t/ours.png',
+      'cloud': 'static/models/gr00t.glb',
+    },
+    'DepthAnythingV2': {
+      'disp': 'static/comparison/gr00t/DA.png',
+      'cloud': 'static/comparison/gr00t/depth_anything.glb',
+    },
+    'Depth Pro': {
+      'disp': 'static/comparison/gr00t/depthpro.png',
+      'cloud': 'static/comparison/gr00t/depth_pro.glb',
+    },
+  }
+
+  var cur_scene = 'Endeavor';
+  var cur_method = 'Ours'
+  var cur_method_mono = 'Ours'
+  window.onload = () => {
+    const left = document.getElementById('left');
+    const disp = document.getElementById('disp');
+    const cloud = document.getElementById('cloud');
+    // const mono_disp = document.getElementById('mono_disp');
+    const mono_cloud = document.getElementById('mono_cloud');
+
+    // Set default image and mark the default button as active
+    left.src = comparison[cur_scene]['left'];
+    disp.src = comparison[cur_scene][cur_method]['disp'];
+    cloud.src = comparison[cur_scene][cur_method]['cloud'];
+    // mono_disp.src = mono_comparison[cur_method_mono]['disp'];
+    mono_cloud.src = mono_comparison[cur_method_mono]['cloud'];
+  };
+
+
+  function change_scene(scene) {
+    cur_scene = scene
+    const left = document.getElementById('left');
+    const buttons = document.querySelectorAll('.scene');
+
+    // Update the image source based on the scene
+    left.src = comparison[scene]['left'];
+
+    // Update active button styling
+    buttons.forEach(button => button.className='button scene is-black is-rounded');
+    document.getElementById(scene).className = 'button scene is-info is-rounded'
+
+    change_method(cur_method)
+  }
+
+  function change_method(method) {
+    cur_method = method
+    const disp = document.getElementById('disp');
+    const cloud = document.getElementById('cloud');
+    const buttons = document.querySelectorAll('.method');
+
+    // Update the image source based on the scene
+    disp.src = comparison[cur_scene][method]['disp']
+    cloud.src = comparison[cur_scene][method]['cloud']
+
+    // Update active button styling
+    buttons.forEach(button => button.className='button method is-black is-rounded');
+    document.getElementById(method).className = 'button method is-info is-rounded'
+  }
+
+  function change_method_mono(method) {
+    cur_method_mono = method
+    // const mono_disp = document.getElementById('mono_disp');
+    const mono_cloud = document.getElementById('mono_cloud');
+    const buttons = document.querySelectorAll('.method_mono');
+
+    // Update the image source based on the scene
+    // mono_disp.src = mono_comparison[method]['disp']
+    mono_cloud.src = mono_comparison[method]['cloud']
+
+    // Update active button styling
+    buttons.forEach(button => button.className='button method_mono is-black is-rounded');
+    if (method=='Ours'){
+      method = 'Ours_mono'
+    }
+    document.getElementById(method).className = 'button method_mono is-info is-rounded'
+  }
+
+
+</script>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website taken from
+              <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
