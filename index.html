@@ -93,7 +93,16 @@
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (coming soon)</span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Dataset (coming soon)</span>
                   </a>
               </span>
             </div>
@@ -182,8 +191,12 @@
         <div class="content has-text-justified">
           <p>The Side-Tuning Adapter (STA) adapts the rich monocular priors from a frozen DepthAnythingV2, while combined with fine-grained high-frequency features from multi-level CNN for unary feature extraction. Attentive Hybrid Cost Filtering (AHCF) combines the strengths of the Axial-Planar Convolution (APC) filtering and a Disparity Transformer (DT) module to effectively aggregate the features along spatial and disparity dimensions over the 4D hybrid cost volume. An initial disparity is then predicted from the filtered cost volume, and subsequently refined through GRU blocks. At each refinement step, the latest disparity is used to look up features from both filtered hybrid cost volume and correlation volume to guide the next refinement. The iteratively refined disparity becomes the final output.
           </p>
+          <img src="static/images/overview.jpg" width="100%">
+          <p>
+
+          </p>
+          <img src="static/images/sdg_montage.jpg" width="100%">
         </div>
-        <img src="static/images/overview.jpg" width="100%">
       </div>
     </div>
 
@@ -248,7 +261,7 @@
       <div class="column is-full">
         <h2 class="title is-3" style="text-align: center;">Comparison to Metric Monocular Depth</h2>
         <!-- <div class="column is-three-fifths"> -->
-          <p style="text-align: left;">We compare with SOTA monocular metric depth estimation methods. Ours yields accurate metric scale point cloud. Feel free to play with the below interactive 3D viewer for detailed comparison.</p>
+          <p style="text-align: left;">We compare with SOTA monocular metric depth estimation methods. Despite their recent advancements, ours still yields the most accurate metric scale point cloud. Play with the below interactive 3D viewer to learn more.</p>
         <!-- </div> -->
         <img src="static/images/mono_comparison.png" width="70%" style="margin-top: 10px;">
         <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: -30px; margin-bottom: -20px;">
@@ -280,6 +293,15 @@
       </div>
     </div>
 
+    <br>
+    <br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Quantitative Comparison</h2>
+        <img src="static/images/table_zero_shot.jpg" width="60%">
+        <img src="static/images/eth.jpg" width="60%" style="margin-top: 20px;">
+      </div>
+    </div>
 
     <br>
     <br>
@@ -287,7 +309,10 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Full Video</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/Ip_yWsGUF6c?si=qnkJtKPyeIl85WMx" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <video style="text-align:center; width:100%" id="v3" autoplay muted loop playsinline controls height="100%">
+            <source src="static/videos/v0c.mp4" type="video/mp4">
+          </video>
+          <!-- <iframe src="https://www.youtube.com/embed/Ip_yWsGUF6c?si=qnkJtKPyeIl85WMx" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
         </div>
       </div>
     </div>
@@ -313,6 +338,12 @@
   </div>
 </section>
 
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgement</h2>
+    We would like to thank Gordon Grigor, Jack Zhang, Karsten Patzwaldt, Hammad Mazhar and other NVIDIA Isaac team members for their tremendous engineering support and valuable discussions.
+  </div>
+</section>
 
 
   </div>
@@ -325,7 +356,8 @@
 <script>
   const comparison = {
     "Endeavor":{
-      "left":"static/comparison/2023-02-16_18-50-35_endeavor_pod/left.png",
+      "left":"static/comparison/2023-02-16_18-50-35_endeavor_pod/img.gif",
+      "right":"static/comparison/2023-02-16_18-50-35_endeavor_pod/right.png",
       "Ours":
       {
         "disp":"static/comparison/2023-02-16_18-50-35_endeavor_pod/disp/ours.png",
@@ -353,7 +385,8 @@
       },
     },
     "Wall":{
-      "left":"static/comparison/wall/left.png",
+      "left":"static/comparison/wall/img.gif",
+      "right":"static/comparison/wall/right.png",
       "Ours":
       {
         "disp":"static/comparison/wall/disp/ours.png",
@@ -381,7 +414,8 @@
       },
     },
     "Robot":{
-      "left":"static/comparison/robot/left.png",
+      "left":"static/comparison/robot/img.gif",
+      "right":"static/comparison/robot/right.png",
       "Ours":
       {
         "disp":"static/comparison/robot/disp/ours.png",
@@ -409,7 +443,8 @@
       },
     },
     "Street":{
-      "left":"static/comparison/street/left.png",
+      "left":"static/comparison/street/img.gif",
+      "right":"static/comparison/street/right.png",
       "Ours":
       {
         "disp":"static/comparison/street/disp/ours.png",
@@ -465,6 +500,12 @@
 
     // Set default image and mark the default button as active
     left.src = comparison[cur_scene]['left'];
+    // left.onmouseover = () => {
+    //   left.src = comparison[cur_scene]['right']
+    // }
+    // left.onmouseout = () => {
+    //   left.src = comparison[cur_scene]['left']
+    // }
     disp.src = comparison[cur_scene][cur_method]['disp'];
     cloud.src = comparison[cur_scene][cur_method]['cloud'];
     // mono_disp.src = mono_comparison[cur_method_mono]['disp'];
@@ -479,6 +520,12 @@
 
     // Update the image source based on the scene
     left.src = comparison[scene]['left'];
+    // left.onmouseover = () => {
+    //   left.src = comparison[scene]['right']
+    // }
+    // left.onmouseout = () => {
+    //   left.src = comparison[scene]['left']
+    // }
 
     // Update active button styling
     buttons.forEach(button => button.className='button scene is-black is-rounded');
