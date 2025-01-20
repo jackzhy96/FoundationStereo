@@ -87,6 +87,17 @@
   display: inline; /* Default for most elements, harmless */
 }
 
+
+.button.method_cam {
+  display: inline; /* Default for most elements, harmless */
+}
+
+
+.button.scene_cam {
+  display: inline; /* Default for most elements, harmless */
+}
+
+
 .delete,
 .modal-close {
   -moz-appearance: none;
