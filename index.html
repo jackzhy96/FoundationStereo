@@ -176,7 +176,7 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">ETH3D Leaderboard 🏆</h2>
-        <p style="text-align: left;margin-bottom: 10px">We obtained the 1st place on the <a href="https://www.eth3d.net/low_res_two_view">ETH3D leaderboard</a> at the time of submission.</p>
+        <p style="text-align: left;margin-bottom: 10px">We obtained the 1st place on the <a href="https://www.eth3d.net/low_res_two_view">ETH3D leaderboard</a>.</p>
         <img src="static/images/eth_leaderboard.png" width="80%">
       </div>
     </div>
@@ -300,8 +300,17 @@
           <p style="text-align: left;">We compare to common RGBD cameras including RealSense, Kinect, Zed. Ours uses the same stereo image from Zed as input. Different cameras may use different filtering steps for postprocessing, wherease the point cloud accuracy should not be affected.</p>
           <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
             <p class="title is-5" style="margin: 0;">Scene:</p>
-            <span id="Toolbox" class="button scene_cam is-info is-rounded" onclick="change_scene_cam('Toolbox')">
+            <span id="Nut" class="button scene_cam is-info is-rounded" onclick="change_scene_cam('Nut')">
+              Nut
+            </span>
+            <span id="Toolbox" class="button scene_cam is-black is-rounded" onclick="change_scene_cam('Toolbox')">
               Toolbox
+            </span>
+            <span id="Bolts Pile" class="button scene_cam is-black is-rounded" onclick="change_scene_cam('Bolts Pile')">
+              Bolts Pile
+            </span>
+            <span id="Bolt" class="button scene_cam is-black is-rounded" onclick="change_scene_cam('Bolt')">
+              Bolt
             </span>
           </div>
           <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px">
@@ -550,12 +559,69 @@
         'cloud': "static/comparison/toolbox/kinect.glb"
       },
     },
+    "Bolts Pile": {
+      "left":"static/comparison/bolts_pile/left.png",
+      "Ours":
+      {
+        'cloud': "static/comparison/bolts_pile/ours_denoise_downsample.glb"
+      },
+      "Zed":
+      {
+        'cloud': "static/comparison/bolts_pile/zed.glb"
+      },
+      "RealSense":
+      {
+        'cloud': "static/comparison/bolts_pile/realsense.glb"
+      },
+      "Kinect Azure":
+      {
+        'cloud': "static/comparison/bolts_pile/kinect.glb"
+      },
+    },
+    "Bolt": {
+      "left":"static/comparison/bolt_single/left.png",
+      "Ours":
+      {
+        'cloud': "static/comparison/bolt_single/ours_denoise.glb"
+      },
+      "Zed":
+      {
+        'cloud': "static/comparison/bolt_single/zed.glb"
+      },
+      "RealSense":
+      {
+        'cloud': "static/comparison/bolt_single/realsense.glb"
+      },
+      "Kinect Azure":
+      {
+        'cloud': "static/comparison/bolt_single/kinect.glb"
+      },
+    },
+    "Nut": {
+      "left":"static/comparison/nut/left.png",
+      "Ours":
+      {
+        'cloud': "static/comparison/nut/ours_denoise.glb"
+      },
+      "Zed":
+      {
+        'cloud': "static/comparison/nut/zed.glb"
+      },
+      "RealSense":
+      {
+        'cloud': "static/comparison/nut/realsense.glb"
+      },
+      "Kinect Azure":
+      {
+        'cloud': "static/comparison/nut/kinect.glb"
+      },
+    }
   }
 
   var cur_scene = 'Endeavor';
   var cur_method = 'Ours'
   var cur_method_mono = 'Ours'
-  var cur_scene_cam = 'Toolbox';
+  var cur_scene_cam = 'Nut';
   var cur_method_cam = 'Ours'
   window.onload = () => {
     const left = document.getElementById('left');
