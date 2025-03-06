@@ -1,4 +1,6 @@
 __pycache__
+pretrained_models
+output
 *.pyc
 *.pyo
 *.pyd

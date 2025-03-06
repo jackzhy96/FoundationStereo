@@ -251,7 +251,7 @@
     <div class="columns is-centered has-text-centered" style="margin-top: 100px;">
       <div class="column is-full">
         <h2 class="title is-3" style="text-align: center;">Comparison to RGBD Camera</h2>
-          <p style="text-align: left;">We compare to common RGBD cameras including RealSense, Kinect, Zed. Ours uses the same stereo image from Zed as input. Different cameras may use different filtering steps for postprocessing, whereas the inlier point cloud accuracy should not be affected.</p>
+          <p style="text-align: left;">We compare to common RGBD cameras including RealSense D435, Kinect Azure, Zed Mini. Ours uses the same stereo image from Zed as input. Different cameras may use different filtering steps for postprocessing, whereas the inlier point cloud accuracy should not be affected.</p>
           <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
             <p class="title is-5" style="margin: 0;">Scene:</p>
             <span id="Nut" class="button scene_cam is-info is-rounded" onclick="change_scene_cam('Nut')">
@@ -298,6 +298,43 @@
         </div>
       </div>
     </div>
+
+    <div class="columns is-centered has-text-centered" style="margin-top: 100px;">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="text-align: center;">Results on Transparent Objects</h2>
+          <p style="text-align: left;">Our method generalizes well to transparent objects, as shown in the examples (from Booster dataset) below.</p>
+          <div style="display: flex; flex: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
+            <p class="title is-5" style="margin: 0;">Scene:</p>
+            <span id="Bottle" class="button scene_trans is-info is-rounded" onclick="change_scene_trans('Bottle')">
+              Bottle
+            </span>
+            <span id="Washer" class="button scene_trans is-black is-rounded" onclick="change_scene_trans('Washer')">
+              Washer
+            </span>
+            <span id="Toilet" class="button scene_trans is-black is-rounded" onclick="change_scene_trans('Toilet')">
+              Toilet
+            </span>
+            <span id="GlassDoor" class="button scene_trans is-black is-rounded" onclick="change_scene_trans('GlassDoor')">
+              Glass Door
+            </span>
+          </div>
+          <div style="display: flex; width: 100%; flex: none; text-align: center; justify-content: center; gap: 2px; margin-top: 10px; margin-bottom:0px">
+            <img id="left_trans" style="width: 40%; height: auto; display: block; object-fit: contain; ">
+            <model-viewer style="width: 50%; height: auto; aspect-ratio: 3/2; border: 1px solid black; display: inline-block; "
+              id="cloud_trans"
+              exposure="0.5"
+              max-camera-orbit="Infinity 180deg 100%"
+              min-camera-orbit="-Infinity -180deg 10%"
+              orientation="0deg 180deg 180deg"
+              camera-orbit="180deg 90deg 60%"
+              camera-controls touch-action="none">
+            </model-viewer>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
 
 
     <div class="columns is-centered has-text-centered" style="margin-top: 150px;">
@@ -612,11 +649,32 @@
     }
   }
 
+
+  const transparent_data = {
+    "Bottle":{
+      "left":"static/transparent/bottles/lr.gif",
+      "cloud": "static/transparent/bottles/cloud.glb",
+    },
+    "Washer":{
+      "left":"static/transparent/washer/lr.gif",
+      "cloud": "static/transparent/washer/cloud_denoise.glb",
+    },
+    "Toilet":{
+      "left":"static/transparent/toilet/lr.gif",
+      "cloud": "static/transparent/toilet/cloud_denoise.glb",
+    },
+    "GlassDoor":{
+      "left":"static/transparent/glass_door/lr.gif",
+      "cloud": "static/transparent/glass_door/cloud_denoise.glb",
+    },
+  }
+
   var cur_scene = 'Endeavor';
   var cur_method = 'Ours'
   var cur_method_mono = 'Ours'
   var cur_scene_cam = 'Nut';
   var cur_method_cam = 'Ours'
+  var cur_scene_trans = 'Bottle';
   window.onload = () => {
     const left = document.getElementById('left');
     const disp = document.getElementById('disp');
@@ -625,6 +683,8 @@
     const mono_cloud = document.getElementById('mono_cloud');
     const left_cam = document.getElementById('left_cam');
     const cloud_cam = document.getElementById('cloud_cam');
+    const left_trans = document.getElementById('left_trans');
+    const cloud_trans = document.getElementById('cloud_trans');
 
     // Set default image and mark the default button as active
     left.src = comparison[cur_scene]['left'];
@@ -633,6 +693,8 @@
     mono_cloud.src = mono_comparison[cur_method_mono]['cloud'];
     left_cam.src = cam_comparison[cur_scene_cam]['left'];
     cloud_cam.src = cam_comparison[cur_scene_cam][cur_method_cam]['cloud'];
+    left_trans.src = transparent_data[cur_scene_trans]['left'];
+    cloud_trans.src = transparent_data[cur_scene_trans]['cloud'];
   };
 
 
@@ -720,6 +782,20 @@
     document.getElementById(method).className = 'button method_cam is-info is-rounded'
   }
 
+  function change_scene_trans(scene) {
+    cur_scene_trans = scene
+    const left_trans = document.getElementById('left_trans');
+    const cloud_trans = document.getElementById('cloud_trans');
+    const buttons = document.querySelectorAll('.scene_trans');
+
+    // Update the image source based on the scene
+    left_trans.src = transparent_data[scene]['left'];
+    cloud_trans.src = transparent_data[scene]['cloud'];
+
+    // Update active button styling
+    buttons.forEach(button => button.className='button scene_trans is-black is-rounded');
+    document.getElementById(scene).className = 'button scene_trans is-info is-rounded'
+  }
 
 </script>
 
