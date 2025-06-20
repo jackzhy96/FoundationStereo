@@ -43,9 +43,11 @@ We've tested on Linux with GPU 3090, 4090, A100, V100, Jetson Orin. Other GPUs s
 
 ```
 conda env create -f environment.yml
+conda run -n foundation_stereo pip install flash-attn
 conda activate foundation_stereo
 ```
 
+Note that `flash-attn` needs to be installed separately to avoid [errors during environment creation](https://github.com/NVlabs/FoundationStereo/issues/20).
 
 
 # Model Weights
@@ -75,7 +77,7 @@ Tips:
 - Our method works best on stereo RGB images. However, we have also tested it on monochrome or IR stereo images (e.g. from RealSense D4XX series) and it works well too.
 - For all options and instructions, check by `python scripts/run_demo.py --help`
 - To get point cloud for your own data, you need to specify the intrinsics. In the intrinsic file in args, 1st line is the flattened 1x9 intrinsic matrix, 2nd line is the baseline (distance) between the left and right camera, unit in meters.
-- For high-resolution image (>1000px), you can run with `--hiera 1` to enable hierarchical inference for better performance.
+- For high-resolution image (>1000px), you can either (1) run with `--hiera 1` to enable hierarchical inference to get full resolution depth but slower; or (2) run with smaller scale, e.g. `--scale 0.5` to get downsized resolution depth but faster.
 - For faster inference, you can reduce the input image resolution by e.g. `--scale 0.5`, and reduce refine iterations by e.g. `--valid_iters 16`.
 
 
@@ -125,6 +127,9 @@ It will produce:
 - Q: Conda install does not work for me?<br>
   A: Check [this](https://github.com/NVlabs/FoundationStereo/issues/20)
 
+- Q: I'm not getting point cloud or getting incomplete point cloud?<br>
+  A: Check the flags in argparse about point cloud processing, such as `--z_far`, `--remove_invisible`, `--denoise_cloud`.
+
 - Q: My GPU doesn't support Flash attention?<br>
   A: See [this](https://github.com/NVlabs/FoundationStereo/issues/13#issuecomment-2708791825)
 
@@ -132,7 +137,7 @@ It will produce:
   A: This may indicate OOM issue. Try reducing your image resolution or use a GPU with more memory.
 
 - Q: How to run with RealSense?<br>
-  A: See [this](https://github.com/NVlabs/FoundationStereo/issues/26)
+  A: See [this](https://github.com/NVlabs/FoundationStereo/issues/26) and [this](https://github.com/NVlabs/FoundationStereo/issues/80)
 
 - Q: I have two or multiple RGB cameras, can I run this? <br>
   A: You can first rectify a pair of images using this [OpenCV function](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga617b1685d4059c6040827800e72ad2b6) into stereo image pair (now they don't have relative rotations), then feed into FoundationStereo.
@@ -153,4 +158,4 @@ We would like to thank Gordon Grigor, Jack Zhang, Karsten Patzwaldt, Hammad Mazh
 
 
 # Contact
-For questions, please reach out to [Bowen Wen](https://wenbowen123.github.io/) (bowenw@nvidia.com).
+For commercial inquiries, additional technical support, and other questions, please reach out to [Bowen Wen](https://wenbowen123.github.io/) (bowenw@nvidia.com).
